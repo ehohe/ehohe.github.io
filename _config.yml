@@ -26,9 +26,9 @@ author:
   avatar           : "profile.png"
   name             : "Edward Hohe"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : "PhD Candidate"
   location         : "Earth"
-  employer         : "Red Brick University"
+  employer         : "The Ohio State University"
   uri              : # URL
   email            : "none@example.org" 
 

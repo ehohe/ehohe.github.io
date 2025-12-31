@@ -6,11 +6,7 @@ author_profile: true
 redirect_from:
   - /resume
 ---
----
-layout: page
-title: Curriculum Vitae
-permalink: /cv/
----
+
 
 # Edward Hohe
 

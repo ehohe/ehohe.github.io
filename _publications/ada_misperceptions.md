@@ -7,7 +7,7 @@ date: 2025-01-01
 venue: 'Political Behavior'
 tags:
   - polarization
-  - discussion willingness
+  - discussion-willingness
   - misperceptions
 citation: "Hohe, Edward. (2025). 'Misperceptions of Out-Partisan Anti-Deliberative Attitudes Shape Partisan Affective and Discursive Polarization.' <i>Political Behavior</i>."
 ---

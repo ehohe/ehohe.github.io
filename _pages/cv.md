@@ -16,7 +16,7 @@ permalink: /cv/
 
 **Political Science PhD Candidate at The Ohio State University** [Google Scholar](https://scholar.google.com/citations?user=_GnZ6W8AAAAJ&hl=en&oi=ao) • [LinkedIn](https://www.linkedin.com/in/edwardhohe/)
 
-<a href="/assets/Edward_Hohe_CV.pdf" class="btn">Download PDF Version</a>
+<a href="/assets/hohe_cv.pdf" class="btn">Download PDF Version</a>
 
 ---
 

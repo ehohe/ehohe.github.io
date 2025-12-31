@@ -5,32 +5,97 @@ permalink: /publications/
 author_profile: true
 ---
 
-{% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
-{% endif %}
 
-{% include base_path %}
-
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
+<div id="filter-buttons" style="margin-bottom: 20px;">
+  <button class="filter-btn active" onclick="filterSelection('all')">Show All</button>
+  {% assign all_tags = "" | split: "" %}
+  {% for post in site.publications %}
+    {% for tag in post.tags %}
+      {% unless all_tags contains tag %}
+        {% assign all_tags = all_tags | push: tag %}
       {% endunless %}
-      {% include archive-single.html %}
     {% endfor %}
   {% endfor %}
-{% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
+  
+  {% for tag in all_tags %}
+    <button class="filter-btn" onclick="filterSelection('{{ tag }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
   {% endfor %}
-{% endif %}
+</div>
 
+<div class="filter-container">
+  {% for post in site.publications reversed %}
+    <div class="filter-item {{ post.tags | join: ' ' }} all">
+      {% include archive-single.html %}
+    </div>
+  {% endfor %}
+</div>
 
+<style>
+/* Simple Button Styling */
+.filter-btn {
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  margin: 2px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+.filter-btn:hover { background-color: #ddd; }
+.filter-btn.active { background-color: #666; color: white; }
 
+/* The Filtering Logic */
+.filter-item { display: none; } /* Hide all by default */
+.show { display: block; }       /* Class to show items */
+</style>
+
+<script>
+filterSelection("all") // Execute the function and show all columns
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filter-item");
+  if (c == "all") c = "";
+  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+// Show filtered elements
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
+  }
+}
+
+// Hide elements that are not selected
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("filter-buttons");
+var btns = btnContainer.getElementsByClassName("filter-btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>

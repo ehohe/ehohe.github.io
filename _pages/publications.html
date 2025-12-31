@@ -45,10 +45,10 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* The Filtering Logic */
-.filter-item { display: none; } /* Hide all by default */
-.show { display: block; }       /* Class to show items */
-</style>
+.filter-item { 
+  display: block; /* Was none */
+  border: 1px solid red; /* Add this to see the outline of the box */
+}
 
 <script>
 filterSelection("all") // Execute the function and show all columns

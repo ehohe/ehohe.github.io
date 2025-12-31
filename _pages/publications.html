@@ -45,30 +45,38 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* The Filtering Logic */
+/* The Filtering Logic - FAIL SAFE VERSION */
 .filter-item {
-  display: none;        /* 1. HIDDEN by default */
+  display: block;       /* VISIBLE by default. If JS fails, your content still shows. */
   margin-bottom: 20px;
 }
 
-.show {
-  display: block;       /* 2. SHOWN when Javascript adds this class */
+.filter-item.hidden {
+  display: none;        /* The JS will add this class to hide items */
 }
-</style>  <script>
-filterSelection("all") // Execute the function and show all columns
+</style>
+
+<script>
+// Run immediately
+filterSelection("all");
 
 function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("filter-item");
   if (c == "all") c = "";
-  // Add the "show" class to filtered elements, remove from others
+  
   for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+    // 1. Reset: Show everything (remove hidden class)
+    w3RemoveClass(x[i], "hidden");
+    
+    // 2. Filter: If it DOESN'T match, hide it
+    if (x[i].className.indexOf(c) == -1) {
+      w3AddClass(x[i], "hidden");
+    }
   }
 }
 
-// Show filtered elements
+// Helper: Add Class
 function w3AddClass(element, name) {
   var i, arr1, arr2;
   arr1 = element.className.split(" ");
@@ -80,7 +88,7 @@ function w3AddClass(element, name) {
   }
 }
 
-// Hide elements that are not selected
+// Helper: Remove Class
 function w3RemoveClass(element, name) {
   var i, arr1, arr2;
   arr1 = element.className.split(" ");
@@ -93,13 +101,14 @@ function w3RemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
-// Add active class to the current button (highlight it)
+// Button Active State Logic
 var btnContainer = document.getElementById("filter-buttons");
 var btns = btnContainer.getElementsByClassName("filter-btn");
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function(){
     var current = document.getElementsByClassName("active");
-    if (current.length > 0) { 
+    // Safety check if no active button exists yet
+    if (current.length > 0) {
         current[0].className = current[0].className.replace(" active", "");
     }
     this.className += " active";

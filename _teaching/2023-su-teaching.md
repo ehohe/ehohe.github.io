@@ -2,7 +2,7 @@
 title: "American National Government"
 collection: teaching
 venue: "Florida State University, Department of Political Science"
-date: Summer 2023
+date: 2023-06-01
 ---
 
 Solo Instructor of Record for the introductory course in American politics at FSU. 

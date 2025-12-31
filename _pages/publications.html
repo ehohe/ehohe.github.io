@@ -45,9 +45,14 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-.filter-item { 
-  display: block; /* Was none */
-  border: 1px solid red; /* Add this to see the outline of the box */
+/* The Filtering Logic */
+.filter-item {
+  display: none;        /* Hidden by default so JS can filter */
+  margin-bottom: 20px;  /* Adds breathing room between papers */
+}
+
+.show {
+  display: block;       /* The JS adds this class to make items visible */
 }
 
 <script>

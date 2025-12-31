@@ -1,7 +1,7 @@
 ---
 title: "American National Government"
 collection: teaching
-venue: "Florida State University, Department"
+venue: "Florida State University, Department of Political Science"
 date: Summer 2023
 ---
 

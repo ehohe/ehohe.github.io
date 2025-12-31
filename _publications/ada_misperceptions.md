@@ -5,6 +5,7 @@ permalink: /publication/2025-misperceptions
 excerpt: Paper summary here
 date: 2025-01-01
 venue: 'Political Behavior'
+paperurl: 'https://link.springer.com/article/10.1007/YOUR_PAPER_LINK'
 tags:
   - polarization
   - discussion-willingness

@@ -47,21 +47,21 @@ author_profile: true
 
 /* The Filtering Logic */
 .filter-item {
-  display: none;        /* Hidden by default so JS can filter */
-  margin-bottom: 20px;  /* Adds breathing room between papers */
+  display: none;        /* 1. HIDDEN by default */
+  margin-bottom: 20px;
 }
 
 .show {
-  display: block;       /* The JS adds this class to make items visible */
+  display: block;       /* 2. SHOWN when Javascript adds this class */
 }
-
-<script>
+</style>  <script>
 filterSelection("all") // Execute the function and show all columns
+
 function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("filter-item");
   if (c == "all") c = "";
-  // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+  // Add the "show" class to filtered elements, remove from others
   for (i = 0; i < x.length; i++) {
     w3RemoveClass(x[i], "show");
     if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
@@ -99,7 +99,9 @@ var btns = btnContainer.getElementsByClassName("filter-btn");
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function(){
     var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
+    if (current.length > 0) { 
+        current[0].className = current[0].className.replace(" active", "");
+    }
     this.className += " active";
   });
 }

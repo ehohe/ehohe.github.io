@@ -10,7 +10,8 @@ redirect_from:
 
 # Edward Hohe
 
-**Political Science PhD Candidate at The Ohio State University** [Google Scholar](https://scholar.google.com/citations?user=_GnZ6W8AAAAJ&hl=en&oi=ao) • [LinkedIn](https://www.linkedin.com/in/edwardhohe/)
+**Political Science PhD Candidate at The Ohio State University** 
+[Google Scholar](https://scholar.google.com/citations?user=_GnZ6W8AAAAJ&hl=en&oi=ao) • [LinkedIn](https://www.linkedin.com/in/edwardhohe/)
 
 <a href="/assets/hohe_cv.pdf" class="btn">Download PDF Version</a>
 
@@ -38,7 +39,7 @@ redirect_from:
 * **Hohe, Edward**. (2025). Misperceptions of Out-Partisan Anti-Deliberative Attitudes Shape Partisan Affective and Discursive Preferences. *Political Behavior*.
 * **Hohe, Edward**. (2024). Red vs Blue Hubris: Clarifying the Relationship Between Partisanship and (Anti-)Intellectualism. *Party Politics*.
 
-### Working Papers
+### Working Papers (drafts available upon request)
 * "An Experimental Comparison of AI-Enabled Semi-Structured Interviews and Fixed Surveys: Response Patterns, Quality and Representation." With Kennedy, Ryan, Amanda Austin, Edward Hohe, Laura Moses, William Minozzi, and Leib Litman. **Revise and Resubmit, *Public Opinion Quarterly***.
 * "What are You Talking About? Political Conceptualization and The Mismeasurement of Political Discussion." Under Review.
 * "Understanding the Effect of Negative Social Descriptive Norms on Political Action." *With Hans Hassell*.

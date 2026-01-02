@@ -74,6 +74,7 @@ redirect_from:
 
 | Year | Award / Grant | Amount |
 |------|---------------|--------|
+| **2025** | Trust and Polarization Grant, Foundation for Individual Rights and Expression | **$5,000** |
 | **2024** | Free Inquiry Grant, Foundation for Individual Rights and Expression | **$12,050** |
 | **2024** | Speech and Intellectual Freedom Grant, Institute for Humane Studies | **$3,000** |
 | **2022** | Summer Research Collaborative Grant, Rapoport Foundation | **$5,000** |

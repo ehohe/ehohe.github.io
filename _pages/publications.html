@@ -17,7 +17,7 @@ author_profile: true
   {% endfor %}
   
   {% for tag in all_tags %}
-    <button class="filter-btn" onclick="filterSelection('{{ tag | slugify }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
+    <button class="filter-btn" id="btn-{{ tag | slugify }}" onclick="filterSelection('{{ tag | slugify }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
   {% endfor %}
 </div>
 
@@ -29,9 +29,7 @@ author_profile: true
         <h2 class="archive__item-title" itemprop="headline" style="margin-bottom: 0.5rem; font-size: 1.2em;">
           <a href="{{ post.paperurl | default: post.url | relative_url }}" rel="permalink">
             {{ post.title }} 
-            
             ({% if post.date %}{{ post.date | date: "%Y" }}{% else %}{{ post.year }}{% endif %}). 
-            
             {% if post.venue %}
               <span style="font-style: italic;">{{ post.venue }}</span>.
             {% endif %}
@@ -41,6 +39,17 @@ author_profile: true
         <div class="archive__item-excerpt" itemprop="description">
           {{ post.excerpt | markdownify }}
         </div>
+
+        {% if post.tags %}
+        <div class="archive__item-tags" style="margin-top: 10px;">
+          {% for tag in post.tags %}
+            <span class="paper-tag" onclick="filterSelection('{{ tag | slugify }}')">
+              {{ tag | capitalize | replace: '-', ' ' }}
+            </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        
       </article>
 
     </div>
@@ -48,7 +57,7 @@ author_profile: true
 </div>
 
 <style>
-/* Simple Button Styling */
+/* Main Filter Buttons */
 .filter-btn {
   border: none;
   outline: none;
@@ -62,23 +71,30 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* The Filtering Logic */
-.filter-item {
-  display: block;      
-  margin-bottom: 30px; 
+/* NEW: Individual Paper Tags */
+.paper-tag {
+  display: inline-block;
+  background-color: #eef; /* Very light blue background */
+  color: #555;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+.paper-tag:hover {
+  background-color: #ccd;
+  color: #000;
 }
 
-/* This class hides elements */
-.filter-item.hidden {
-  display: none;       
-}
+/* Filtering Logic */
+.filter-item { display: block; margin-bottom: 30px; }
+.filter-item.hidden { display: none; }
 
-.archive__item-title a {
-  text-decoration: none;
-}
-.archive__item-title a:hover {
-  text-decoration: underline;
-}
+/* Link Styling */
+.archive__item-title a { text-decoration: none; }
+.archive__item-title a:hover { text-decoration: underline; }
 </style>
 
 <script>
@@ -89,10 +105,31 @@ function filterSelection(c) {
   x = document.getElementsByClassName("filter-item");
   if (c == "all") c = "";
   
+  // 1. Filter the items
   for (i = 0; i < x.length; i++) {
     w3RemoveClass(x[i], "hidden");
     if (x[i].className.indexOf(c) == -1) {
       w3AddClass(x[i], "hidden");
+    }
+  }
+
+  // 2. Update the top buttons state
+  // First, remove "active" from all buttons
+  var btnContainer = document.getElementById("filter-buttons");
+  var btns = btnContainer.getElementsByClassName("filter-btn");
+  for (var k = 0; k < btns.length; k++) {
+    w3RemoveClass(btns[k], "active");
+  }
+
+  // Then, activate the correct button
+  // If "all", activate the first button (Show All)
+  if (c == "") {
+    w3AddClass(btns[0], "active"); 
+  } else {
+    // Try to find the specific button ID we created
+    var activeBtn = document.getElementById("btn-" + c);
+    if (activeBtn) {
+      w3AddClass(activeBtn, "active");
     }
   }
 }
@@ -118,17 +155,5 @@ function w3RemoveClass(element, name) {
     }
   }
   element.className = arr1.join(" ");
-}
-
-var btnContainer = document.getElementById("filter-buttons");
-var btns = btnContainer.getElementsByClassName("filter-btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function(){
-    var current = document.getElementsByClassName("active");
-    if (current.length > 0) {
-        current[0].className = current[0].className.replace(" active", "");
-    }
-    this.className += " active";
-  });
 }
 </script>

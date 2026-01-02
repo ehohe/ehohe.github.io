@@ -5,7 +5,6 @@ permalink: /publications/
 author_profile: true
 ---
 
-
 <div id="filter-buttons" style="margin-bottom: 20px;">
   <button class="filter-btn active" onclick="filterSelection('all')">Show All</button>
   {% assign all_tags = "" | split: "" %}
@@ -25,7 +24,25 @@ author_profile: true
 <div class="filter-container">
   {% for post in site.publications reversed %}
     <div class="filter-item {{ post.tags | join: ' ' }} all">
-      {% include archive-single.html type="list" post=post %}
+      
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline" style="margin-bottom: 0.5rem; font-size: 1.2em;">
+          <a href="{{ post.paperurl | default: post.url | relative_url }}" rel="permalink">
+            {{ post.title }} 
+            
+            ({% if post.date %}{{ post.date | date: "%Y" }}{% else %}{{ post.year }}{% endif %}). 
+            
+            {% if post.venue %}
+              <span style="font-style: italic;">{{ post.venue }}</span>.
+            {% endif %}
+          </a>
+        </h2>
+        
+        <div class="archive__item-excerpt" itemprop="description">
+          {{ post.content | markdownify }}
+        </div>
+      </article>
+
     </div>
   {% endfor %}
 </div>
@@ -45,19 +62,28 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* The Filtering Logic - FAIL SAFE VERSION */
+/* The Filtering Logic */
 .filter-item {
-  display: block;       /* VISIBLE by default. If JS fails, your content still shows. */
-  margin-bottom: 20px;
+  display: block;      
+  margin-bottom: 30px; 
 }
 
 .filter-item.hidden {
-  display: none;        /* The JS will add this class to hide items */
+  display: none;       
+}
+
+/* Remove default link underline to make the whole citation look cleaner */
+.archive__item-title a {
+  text-decoration: none;
+  color: #333; /* Dark grey/black instead of standard link blue, change if desired */
+}
+.archive__item-title a:hover {
+  text-decoration: underline;
+  color: #000;
 }
 </style>
 
 <script>
-// Run immediately
 filterSelection("all");
 
 function filterSelection(c) {
@@ -66,17 +92,13 @@ function filterSelection(c) {
   if (c == "all") c = "";
   
   for (i = 0; i < x.length; i++) {
-    // 1. Reset: Show everything (remove hidden class)
     w3RemoveClass(x[i], "hidden");
-    
-    // 2. Filter: If it DOESN'T match, hide it
     if (x[i].className.indexOf(c) == -1) {
       w3AddClass(x[i], "hidden");
     }
   }
 }
 
-// Helper: Add Class
 function w3AddClass(element, name) {
   var i, arr1, arr2;
   arr1 = element.className.split(" ");
@@ -88,7 +110,6 @@ function w3AddClass(element, name) {
   }
 }
 
-// Helper: Remove Class
 function w3RemoveClass(element, name) {
   var i, arr1, arr2;
   arr1 = element.className.split(" ");
@@ -101,13 +122,11 @@ function w3RemoveClass(element, name) {
   element.className = arr1.join(" ");
 }
 
-// Button Active State Logic
 var btnContainer = document.getElementById("filter-buttons");
 var btns = btnContainer.getElementsByClassName("filter-btn");
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function(){
     var current = document.getElementsByClassName("active");
-    // Safety check if no active button exists yet
     if (current.length > 0) {
         current[0].className = current[0].className.replace(" active", "");
     }

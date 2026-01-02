@@ -39,7 +39,7 @@ author_profile: true
         </h2>
         
         <div class="archive__item-excerpt" itemprop="description">
-          {{ post.content | markdownify }}
+          {{ post.excerpt | markdownify }}
         </div>
       </article>
 
@@ -72,14 +72,14 @@ author_profile: true
   display: none;       
 }
 
-/* Remove default link underline to make the whole citation look cleaner */
+/* REMOVED the color override here. 
+   The links should now inherit the standard blue from your theme.
+*/
 .archive__item-title a {
   text-decoration: none;
-  color: #333; /* Dark grey/black instead of standard link blue, change if desired */
 }
 .archive__item-title a:hover {
   text-decoration: underline;
-  color: #000;
 }
 </style>
 

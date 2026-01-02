@@ -17,13 +17,13 @@ author_profile: true
   {% endfor %}
   
   {% for tag in all_tags %}
-    <button class="filter-btn" onclick="filterSelection('{{ tag }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
+    <button class="filter-btn" onclick="filterSelection('{{ tag | slugify }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
   {% endfor %}
 </div>
 
 <div class="filter-container">
   {% for post in site.publications reversed %}
-    <div class="filter-item {{ post.tags | join: ' ' }} all">
+    <div class="filter-item {{ post.tags | map: 'slugify' | join: ' ' }} all">
       
       <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
         <h2 class="archive__item-title" itemprop="headline" style="margin-bottom: 0.5rem; font-size: 1.2em;">
@@ -68,13 +68,11 @@ author_profile: true
   margin-bottom: 30px; 
 }
 
+/* This class hides elements */
 .filter-item.hidden {
   display: none;       
 }
 
-/* REMOVED the color override here. 
-   The links should now inherit the standard blue from your theme.
-*/
 .archive__item-title a {
   text-decoration: none;
 }

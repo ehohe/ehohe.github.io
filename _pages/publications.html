@@ -59,7 +59,6 @@ author_profile: true
 </div>
 
 <style>
-/* Main Filter Buttons */
 .filter-btn {
   border: none;
   outline: none;
@@ -73,7 +72,6 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* Individual Paper Tags */
 .paper-tag {
   display: inline-block;
   background-color: #eef;
@@ -90,88 +88,68 @@ author_profile: true
   color: #000;
 }
 
-/* Filtering Logic */
 .filter-item { display: block; margin-bottom: 30px; }
 .filter-item.hidden { display: none; }
 
-/* Link Styling */
 .archive__item-title a { text-decoration: none; }
 .archive__item-title a:hover { text-decoration: underline; }
 </style>
 
 <script>
 (function() {
-  'use strict';
-  
   function filterSelection(filterValue) {
-    console.log("Filtering by:", filterValue);
-    
     var items = document.getElementsByClassName("filter-item");
-    console.log("Found items:", items.length);
     
-    // Show all if 'all' is selected
     if (filterValue === "all") {
       for (var i = 0; i < items.length; i++) {
         items[i].style.display = "block";
-        items[i].classList.remove("hidden");
       }
     } else {
-      // Show only matching items
       for (var i = 0; i < items.length; i++) {
         var classes = items[i].className;
-        console.log("Item classes:", classes);
-        
         if (classes.indexOf(filterValue) > -1) {
           items[i].style.display = "block";
-          items[i].classList.remove("hidden");
         } else {
           items[i].style.display = "none";
-          items[i].classList.add("hidden");
         }
       }
     }
 
-    // Update button states
     var btns = document.querySelectorAll(".filter-btn");
     for (var k = 0; k < btns.length; k++) {
       btns[k].classList.remove("active");
     }
 
-    // Activate clicked button
     var activeBtn = document.querySelector('.filter-btn[data-filter="' + filterValue + '"]');
     if (activeBtn) {
       activeBtn.classList.add("active");
     }
   }
   
-  // Initialize when DOM is ready
+  function init() {
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    for (var i = 0; i < filterBtns.length; i++) {
+      filterBtns[i].addEventListener('click', function() {
+        var filter = this.getAttribute('data-filter');
+        filterSelection(filter);
+      });
+    }
+    
+    var paperTags = document.querySelectorAll('.paper-tag');
+    for (var i = 0; i < paperTags.length; i++) {
+      paperTags[i].addEventListener('click', function() {
+        var filter = this.getAttribute('data-filter');
+        filterSelection(filter);
+      });
+    }
+    
+    filterSelection('all');
+  }
+  
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
-  }
-  
-  function init() {
-    // Add click handlers to all filter buttons
-    var filterBtns = document.querySelectorAll('.filter-btn');
-    filterBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var filter = this.getAttribute('data-filter');
-        filterSelection(filter);
-      });
-    });
-    
-    // Add click handlers to paper tags
-    var paperTags = document.querySelectorAll('.paper-tag');
-    paperTags.forEach(function(tag) {
-      tag.addEventListener('click', function() {
-        var filter = this.getAttribute('data-filter');
-        filterSelection(filter);
-      });
-    });
-    
-    // Show all by default
-    filterSelection('all');
   }
 })();
 </script>

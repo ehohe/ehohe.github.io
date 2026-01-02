@@ -6,8 +6,7 @@ author_profile: true
 ---
 
 <div id="filter-buttons" style="margin-bottom: 20px;">
-  <button class="filter-btn active" type="button" onclick="window.filterSelection('all')">Show All</button>
-  
+  <button class="filter-btn active" onclick="filterSelection('all')">Show All</button>
   {% assign all_tags = "" | split: "" %}
   {% for post in site.publications %}
     {% for tag in post.tags %}
@@ -18,15 +17,14 @@ author_profile: true
   {% endfor %}
   
   {% for tag in all_tags %}
-    <button class="filter-btn" type="button" id="btn-{{ tag | slugify }}" onclick="window.filterSelection('{{ tag | slugify }}')">
-      {{ tag | capitalize | replace: '-', ' ' }}
-    </button>
+    {% assign tag_slug = tag | slugify %}
+    <button class="filter-btn" id="btn-{{ tag_slug }}" onclick="filterSelection('{{ tag_slug }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
   {% endfor %}
 </div>
 
 <div class="filter-container">
   {% for post in site.publications reversed %}
-    <div class="filter-item" data-tags="{{ post.tags | map: 'slugify' | join: ' ' }} all">
+    <div class="filter-item all{% for tag in post.tags %}{% assign tag_slug = tag | slugify %} {{ tag_slug }}{% endfor %}">
       
       <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
         <h2 class="archive__item-title" itemprop="headline" style="margin-bottom: 0.5rem; font-size: 1.2em;">
@@ -46,7 +44,8 @@ author_profile: true
         {% if post.tags %}
         <div class="archive__item-tags" style="margin-top: 10px;">
           {% for tag in post.tags %}
-            <span class="paper-tag" onclick="window.filterSelection('{{ tag | slugify }}'); event.stopPropagation();">
+            {% assign tag_slug = tag | slugify %}
+            <span class="paper-tag" onclick="filterSelection('{{ tag_slug }}')">
               {{ tag | capitalize | replace: '-', ' ' }}
             </span>
           {% endfor %}
@@ -74,7 +73,7 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* Individual Paper Tags (Pills) */
+/* Individual Paper Tags */
 .paper-tag {
   display: inline-block;
   background-color: #eef;
@@ -85,26 +84,15 @@ author_profile: true
   margin-right: 5px;
   cursor: pointer;
   border: 1px solid #ddd;
-  transition: all 0.2s;
 }
 .paper-tag:hover {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
+  background-color: #ccd;
+  color: #000;
 }
 
-/* Filtering Container Logic */
-.filter-item {
-  display: block;      
-  margin-bottom: 30px; 
-  transition: opacity 0.3s ease; /* Smooth transition */
-}
-
-/* The HIDDEN class */
-.filter-item.hidden {
-  display: none !important; 
-  opacity: 0;
-}
+/* Filtering Logic */
+.filter-item { display: block; margin-bottom: 30px; }
+.filter-item.hidden { display: none; }
 
 /* Link Styling */
 .archive__item-title a { text-decoration: none; }
@@ -112,58 +100,59 @@ author_profile: true
 </style>
 
 <script>
-// We attach the function to 'window' to ensure it is Globally Accessible
-// even if this file is included inside another scope.
-window.filterSelection = function(c) {
+filterSelection("all");
+
+function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("filter-item");
   if (c == "all") c = "";
   
+  // Filter the items
   for (i = 0; i < x.length; i++) {
     w3RemoveClass(x[i], "hidden");
-    
-    // We check the 'data-tags' attribute instead of className
-    var tags = x[i].getAttribute("data-tags");
-    
-    // If the tags string doesn't contain our category 'c', hide it.
-    // We pad with spaces " " + c + " " to ensure we don't match partial words
-    // (e.g. searching "art" shouldn't match "part")
-    // But for simplicity with slugify, standard indexOf is usually fine here.
-    if (c !== "" && tags.indexOf(c) === -1) {
+    if (c !== "" && x[i].className.indexOf(c) == -1) {
       w3AddClass(x[i], "hidden");
     }
   }
-  
-  // Update Buttons Active State
-  var btns = document.getElementsByClassName("filter-btn");
-  for (var i = 0; i < btns.length; i++) {
-    w3RemoveClass(btns[i], "active");
+
+  // Update the top buttons state
+  var btnContainer = document.getElementById("filter-buttons");
+  var btns = btnContainer.getElementsByClassName("filter-btn");
+  for (var k = 0; k < btns.length; k++) {
+    w3RemoveClass(btns[k], "active");
   }
-  
+
+  // Activate the correct button
   if (c == "") {
-    if(btns.length > 0) w3AddClass(btns[0], "active");
+    w3AddClass(btns[0], "active"); 
   } else {
     var activeBtn = document.getElementById("btn-" + c);
-    if (activeBtn) w3AddClass(activeBtn, "active");
+    if (activeBtn) {
+      w3AddClass(activeBtn, "active");
+    }
   }
-};
+}
 
-// Helper functions
 function w3AddClass(element, name) {
-  var arr = element.className.split(" ");
-  if (arr.indexOf(name) == -1) {
-    element.className += " " + name;
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {
+      element.className += " " + arr2[i];
+    }
   }
 }
 
 function w3RemoveClass(element, name) {
-  var arr = element.className.split(" ");
-  while (arr.indexOf(name) > -1) {
-    arr.splice(arr.indexOf(name), 1);
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
   }
-  element.className = arr.join(" ");
+  element.className = arr1.join(" ");
 }
-
-// Run immediately to show all
-window.filterSelection("all");
 </script>

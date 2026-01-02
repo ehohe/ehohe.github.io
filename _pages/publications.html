@@ -6,7 +6,8 @@ author_profile: true
 ---
 
 <div id="filter-buttons" style="margin-bottom: 20px;">
-  <button class="filter-btn active" onclick="filterSelection('all')">Show All</button>
+  <button class="filter-btn active" type="button" onclick="filterSelection('all')">Show All</button>
+  
   {% assign all_tags = "" | split: "" %}
   {% for post in site.publications %}
     {% for tag in post.tags %}
@@ -17,7 +18,9 @@ author_profile: true
   {% endfor %}
   
   {% for tag in all_tags %}
-    <button class="filter-btn" id="btn-{{ tag | slugify }}" onclick="filterSelection('{{ tag | slugify }}')">{{ tag | capitalize | replace: '-', ' ' }}</button>
+    <button class="filter-btn" type="button" id="btn-{{ tag | slugify }}" onclick="filterSelection('{{ tag | slugify }}')">
+      {{ tag | capitalize | replace: '-', ' ' }}
+    </button>
   {% endfor %}
 </div>
 
@@ -43,7 +46,7 @@ author_profile: true
         {% if post.tags %}
         <div class="archive__item-tags" style="margin-top: 10px;">
           {% for tag in post.tags %}
-            <span class="paper-tag" onclick="filterSelection('{{ tag | slugify }}')">
+            <span class="paper-tag" onclick="filterSelection('{{ tag | slugify }}'); event.stopPropagation();">
               {{ tag | capitalize | replace: '-', ' ' }}
             </span>
           {% endfor %}
@@ -71,10 +74,10 @@ author_profile: true
 .filter-btn:hover { background-color: #ddd; }
 .filter-btn.active { background-color: #666; color: white; }
 
-/* NEW: Individual Paper Tags */
+/* Individual Paper Tags (Pills) */
 .paper-tag {
   display: inline-block;
-  background-color: #eef; /* Very light blue background */
+  background-color: #eef;
   color: #555;
   padding: 2px 8px;
   border-radius: 12px;
@@ -82,15 +85,24 @@ author_profile: true
   margin-right: 5px;
   cursor: pointer;
   border: 1px solid #ddd;
+  transition: all 0.2s;
 }
 .paper-tag:hover {
-  background-color: #ccd;
-  color: #000;
+  background-color: #007bff; /* Standard blue on hover */
+  color: white;
+  border-color: #007bff;
 }
 
 /* Filtering Logic */
-.filter-item { display: block; margin-bottom: 30px; }
-.filter-item.hidden { display: none; }
+.filter-item {
+  display: block;      
+  margin-bottom: 30px; 
+}
+
+/* The HIDDEN class - Important! */
+.filter-item.hidden {
+  display: none !important; /* !important ensures it overrides other display styles */
+}
 
 /* Link Styling */
 .archive__item-title a { text-decoration: none; }
@@ -98,62 +110,50 @@ author_profile: true
 </style>
 
 <script>
-filterSelection("all");
+// Run immediately on page load
+document.addEventListener("DOMContentLoaded", function() {
+  filterSelection("all");
+});
 
 function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("filter-item");
   if (c == "all") c = "";
   
-  // 1. Filter the items
+  // 1. Loop through all items and hide/show based on class
   for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "hidden");
-    if (x[i].className.indexOf(c) == -1) {
-      w3AddClass(x[i], "hidden");
+    var element = x[i];
+    if (c === "") {
+      // If "all", remove hidden from everything
+      element.classList.remove("hidden");
+    } else {
+      // Check if the element has the class we are filtering for
+      if (element.classList.contains(c)) {
+        element.classList.remove("hidden");
+      } else {
+        element.classList.add("hidden");
+      }
     }
   }
 
-  // 2. Update the top buttons state
-  // First, remove "active" from all buttons
-  var btnContainer = document.getElementById("filter-buttons");
-  var btns = btnContainer.getElementsByClassName("filter-btn");
-  for (var k = 0; k < btns.length; k++) {
-    w3RemoveClass(btns[k], "active");
+  // 2. Update Top Button Active State
+  var btns = document.getElementsByClassName("filter-btn");
+  
+  // Remove active from all buttons first
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.remove("active");
   }
 
-  // Then, activate the correct button
-  // If "all", activate the first button (Show All)
-  if (c == "") {
-    w3AddClass(btns[0], "active"); 
+  // Add active to the correct button
+  if (c === "") {
+    // If all, highlight the first button (which is "Show All")
+    if(btns.length > 0) btns[0].classList.add("active");
   } else {
-    // Try to find the specific button ID we created
+    // Find the specific button ID we generated: "btn-tagname"
     var activeBtn = document.getElementById("btn-" + c);
     if (activeBtn) {
-      w3AddClass(activeBtn, "active");
+      activeBtn.classList.add("active");
     }
   }
-}
-
-function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {
-      element.className += " " + arr2[i];
-    }
-  }
-}
-
-function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
-    }
-  }
-  element.className = arr1.join(" ");
 }
 </script>

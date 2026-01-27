@@ -38,6 +38,27 @@ a[role="button"][aria-labelledby="theme-icon"] {
   display: none !important;
 }
 
+body {
+  font-size: 20px !important;
+}
+
+html {
+  font-size: 20px !important;
+}
+
+* {
+  font-size: 1.1em !important;
+}
+
+.page__content p,
+.page__content li {
+  font-size: 1.2em !important;
+}
+
+.archive__item-title {
+  font-size: 1.5em !important;
+}
+
 .author__avatar img {
   width: 200px !important;
   height: 300px !important;

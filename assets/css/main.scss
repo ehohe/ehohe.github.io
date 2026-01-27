@@ -47,27 +47,31 @@ a[role="button"][aria-labelledby="theme-icon"] {
   display: none !important;
 }
 
-/* Scale everything up */
-html {
-  font-size: 18px !important; /* Default is usually 16px */
+/* Scale everything up - MORE AGGRESSIVE */
+body {
+  font-size: 20px !important;
 }
 
-/* Scale up specific elements more if needed */
-.page__content {
-  font-size: 1.1em; /* 10% larger than base */
+html {
+  font-size: 20px !important;
+}
+
+* {
+  font-size: 1.1em !important;
+}
+
+.page__content p,
+.page__content li {
+  font-size: 1.2em !important;
 }
 
 .archive__item-title {
-  font-size: 1.3em !important; /* Larger titles */
+  font-size: 1.5em !important;
 }
 
 .author__avatar img {
-  width: 130px !important; /* Larger profile image (default is ~110px) */
-  height: 130px !important;
+  width: 150px !important;
+  height: 150px !important;
 }
-
-/* Scale up images in content */
-.page__content img {
-  max-width: 110% !important;
   margin-left: -5%;
 }

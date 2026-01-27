@@ -38,29 +38,6 @@ a[role="button"][aria-labelledby="theme-icon"] {
   display: none !important;
 }
 
-/* Scale everything up */
-
-html {
-  font-size: 18px !important;
-}
-
-body {
-  font-size: 18px !important;
-}
-
-* {
-  font-size: 1.1em !important;
-}
-
-.page__content p,
-.page__content li {
-  font-size: 1.1em !important;
-}
-
-.archive__item-title {
-  font-size: 1.3em !important;
-}
-
 .author__avatar img {
   width: 200px !important;
   height: 300px !important;

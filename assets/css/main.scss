@@ -41,14 +41,23 @@ a[role="button"][aria-labelledby="theme-icon"] {
 
 html {
   font-size: 22px !important;
+}font-size: 22px !important;
 }
 
-/* Scale up top navigation menu */
+body {
+  font-size: 22px !important;
+}
+
+/* Scale up everything proportionally */
+body * {
+  font-size: inherit !important;
+}
+
+/* Keep navigation and title at your preferred sizes */
 .greedy-nav a {
   font-size: 26px !important;
 }
 
-/* Scale up site title */
 .site-title {
   font-size: 28px !important;
 }

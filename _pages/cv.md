@@ -49,24 +49,6 @@ redirect_from:
 
 ---
 
-## Research Appointments and Experience
-
-**Graduate Research Associate**, Machine Assisted Human Decision Making Laboratory  
-*The Ohio State University, Columbus, OH (2024–Present)*
-* Designed and analyzed experimental survey data investigating how AI tools can be effectively used in public opinion surveys from a cognitive interviewing perspective.
-
-**Graduate Research Assistant**, Institute of Politics  
-*Florida State University, Tallahassee, FL (2021–2023)*
-* Designed and analyzed survey data in Florida state representative polls about state elections.
-* Assisted researchers with survey design and integrating their modules into omnibus surveys.
-
-**Research Assistant**, The Harkin Institute for Public Policy and Civic Engagement  
-*Drake University, Des Moines, IA (2019–2021)*
-* Collected and analyzed quantitative and qualitative research on public policy and citizen engagement.
-* Led the first project on political behavior, set and executed on an ambitious timeline, decided which data was collected, and headed data analysis and visualization.
-
----
-
 ## Awards, Fellowships, & Grants
 
 | Year | Award / Grant | Amount |

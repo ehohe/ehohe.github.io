@@ -41,8 +41,8 @@ redirect_from:
 
 ### Working Papers (drafts available upon request)
 * "An Experimental Comparison of AI-Enabled Semi-Structured Interviews and Fixed Surveys: Response Patterns, Quality and Representation." With Kennedy, Ryan, Amanda Austin, Edward Hohe, Laura Moses, William Minozzi, and Leib Litman. **Revise and Resubmit, *Public Opinion Quarterly***.
-* "What are You Talking About? Political Conceptualization and The Mismeasurement of Political Discussion."_ Under Review_.
-* "Cognitive Needs Fragment the Left and Unify the Right." _ Under Review_.
+* "What are You Talking About? Political Conceptualization and The Mismeasurement of Political Discussion."_Under Review_.
+* "Cognitive Needs Fragment the Left and Unify the Right." _Under Review_.
 * "Understanding the Effect of Negative Social Descriptive Norms on Political Action." *With Hans Hassell*.
 * "Counterfactual vs Abstract Self-Censorship." *With Katie Gouge*.
 * "Corrections with Consequences: How Pre-Commitment Bridges Beliefs and Attitudes."

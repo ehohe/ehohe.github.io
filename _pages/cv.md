@@ -40,7 +40,7 @@ redirect_from:
 * **Hohe, Edward**. (2024). Red vs Blue Hubris: Clarifying the Relationship Between Partisanship and (Anti-)Intellectualism. *Party Politics*.
 
 ### Working Papers (drafts available upon request)
-* "An Experimental Comparison of AI-Enabled Semi-Structured Interviews and Fixed Surveys: Response Patterns, Quality and Representation." With Kennedy, Ryan, Amanda Austin, Edward Hohe, Laura Moses, William Minozzi, and Leib Litman. **Revise and Resubmit, *Public Opinion Quarterly***.
+* "An Experimental Comparison of AI-Enabled Semi-Structured Interviews and Fixed Surveys: Response Patterns, Quality and Representation." With Kennedy, Ryan, Amanda Austin, Edward Hohe, Laura Moses, William Minozzi, and Leib Litman. **Conditionally Accepted, *Public Opinion Quarterly***.
 * "What are You Talking About? Political Conceptualization and The Mismeasurement of Political Discussion."_Under Review_.
 * "Cognitive Needs Fragment the Left and Unify the Right." _Under Review_.
 * Does Tone Matter in AI Generated Letters from Representatives? *With Ryan Kennedy and Adam Ozer*. 

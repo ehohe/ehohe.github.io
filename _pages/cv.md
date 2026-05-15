@@ -43,9 +43,10 @@ redirect_from:
 * "An Experimental Comparison of AI-Enabled Semi-Structured Interviews and Fixed Surveys: Response Patterns, Quality and Representation." With Kennedy, Ryan, Amanda Austin, Edward Hohe, Laura Moses, William Minozzi, and Leib Litman. **Revise and Resubmit, *Public Opinion Quarterly***.
 * "What are You Talking About? Political Conceptualization and The Mismeasurement of Political Discussion."_Under Review_.
 * "Cognitive Needs Fragment the Left and Unify the Right." _Under Review_.
+* Does Tone Matter in AI Generated Letters from Representatives? *With Ryan Kennedy and Adam Ozer*. 
 * "Understanding the Effect of Negative Social Descriptive Norms on Political Action." *With Hans Hassell*.
 * "Counterfactual vs Abstract Self-Censorship." *With Katie Gouge*.
-* "Corrections with Consequences: How Pre-Commitment Bridges Beliefs and Attitudes."
+* "Corrections with Consequences: How Pre-Commitment and Conversational Norms Bridge Beliefs and Attitudes."
 
 ---
 
